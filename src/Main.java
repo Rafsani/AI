@@ -71,15 +71,9 @@ public class Main {
     {
         int Colours[] = new int[G.listOfVertices.size()];
 
-        // Initialize all vertices as unassigned
+
         Arrays.fill(Colours, -1);
 
-        // Assign the first color to first vertex
-     //   Colours[0] = 0;
-
-        // A temporary array to store the Colours_available colors. False
-        // value of Colours_available[cr] would mean that the color cr is
-        // assigned to one of its adjacent vertices
         PriorityQueue<Course>  pq = new PriorityQueue<>();
         for (int i=0; i<G.listOfVertices.size(); i++)
         {
@@ -88,17 +82,13 @@ public class Main {
 
         boolean Colours_available[] = new boolean[G.listOfVertices.size()];
 
-        // Initially, all colors are Colours_available
         Arrays.fill(Colours_available, true);
         Course first = pq.poll();
         Colours[first.CourseId-1] = 0;
 
-        // Assign colors to remaining V-1 vertices
         while(!pq.isEmpty())
         {
             Course u = pq.poll();
-            // Process all adjacent vertices and flag their colors
-            // as unColours_available
             Iterator<Course> it = G.listOfVertices.get(u.CourseId-1).courses.iterator() ;
             while (it.hasNext())
             {
@@ -107,25 +97,23 @@ public class Main {
                     Colours_available[Colours[i.CourseId-1]] = false;
             }
 
-            // Find the first Colours_available color
+
             int cr;
             for (cr = 0; cr < G.listOfVertices.size(); cr++){
                 if (Colours_available[cr])
                     break;
             }
 
-            Colours[u.CourseId-1] = cr; // Assign the found color
+            Colours[u.CourseId-1] = cr;
 
-            // Reset the values back to true for the next iteration
+
             Arrays.fill(Colours_available, true);
         }
 
-        // print the Colours
+
         int slots = -1;
         for (int u = 0; u < G.listOfVertices.size(); u++){
-//            System.out.println("Course " + (u+1) + " ---> Slot "
-//                    + Colours[u]);
-            G.listOfVertices.get(u).slotNo = Colours[u];
+          G.listOfVertices.get(u).slotNo = Colours[u];
             if(slots<Colours[u])
             {
                 slots = Colours[u];
@@ -139,25 +127,22 @@ public static void greedyColoring(Graph G)
     {
         int Colours[] = new int[G.listOfVertices.size()];
 
-        // Initialize all vertices as unassigned 
+
         Arrays.fill(Colours, -1);
 
-        // Assign the first color to first vertex 
+
         Colours[0] = 0;
 
-        // A temporary array to store the Colours_available colors. False 
-        // value of Colours_available[cr] would mean that the color cr is 
-        // assigned to one of its adjacent vertices 
+
         boolean Colours_available[] = new boolean[G.listOfVertices.size()];
 
-        // Initially, all colors are Colours_available 
+
         Arrays.fill(Colours_available, true);
 
-        // Assign colors to remaining V-1 vertices 
+
         for (int u = 1; u < G.listOfVertices.size(); u++)
         {
-            // Process all adjacent vertices and flag their colors 
-            // as unColours_available 
+
             Iterator<Course> it = G.listOfVertices.get(u).courses.iterator() ;
             while (it.hasNext())
             {
@@ -166,25 +151,23 @@ public static void greedyColoring(Graph G)
                     Colours_available[Colours[i.CourseId-1]] = false;
             }
 
-            // Find the first Colours_available color 
+
             int cr;
             for (cr = 0; cr < G.listOfVertices.size(); cr++){
                 if (Colours_available[cr])
                     break;
             }
 
-            Colours[u] = cr; // Assign the found color 
+            Colours[u] = cr;
 
-            // Reset the values back to true for the next iteration 
+
             Arrays.fill(Colours_available, true);
         }
 
-        // print the Colours
+
         int slots = -1;
         for (int u = 0; u < G.listOfVertices.size(); u++){
-//            System.out.println("Course " + (u+1) + " ---> Slot "
-//                    + Colours[u]);
-            G.listOfVertices.get(u).slotNo = Colours[u];
+          G.listOfVertices.get(u).slotNo = Colours[u];
             if(slots<Colours[u])
             {
                 slots = Colours[u];
@@ -261,10 +244,10 @@ public static void greedyColoring(Graph G)
 
         System.out.println(K.Algorithm(G));
 
-//        for (Course i: G.listOfVertices
-//             ) {
-//            System.out.println(i);
-//        }
+        for (Course i: G.listOfVertices
+             ) {
+            System.out.println(i);
+        }
         }
 
 

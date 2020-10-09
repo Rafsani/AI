@@ -12,7 +12,7 @@ public class KempeChain {
         double FinalPenalty = 0.0;
         double prevPenalty = Main.Penalty(G);
         Chain.clear();
-        for (int o=0;o<100;o++)
+        for (int o=0;o<10000;o++)
         {
 
             Random rand = new Random();
@@ -55,7 +55,7 @@ public class KempeChain {
 
             }
 
-            System.out.println("---------------------Start---------------------");
+            //System.out.println("---------------------Start---------------------");
 
             for (Course i : Chain
             ) {
@@ -63,13 +63,13 @@ public class KempeChain {
                     G.listOfVertices.get(i.CourseId - 1).slotNo = slot2;
                 else
                     G.listOfVertices.get(i.CourseId - 1).slotNo = slot1;
-                System.out.println(i);
+               // System.out.println(i);
             }
 
             double Temp_penalty = Main.Penalty(G);
 
 
-            System.out.println("------------------------------------------");
+            //System.out.println("------------------------------------------");
             if (Temp_penalty > prevPenalty) {
                 for (Course i : Chain
                 ) {
@@ -83,12 +83,12 @@ public class KempeChain {
             } else {
                 prevPenalty = Temp_penalty;
             }
-            for(Course i : Chain)
-            {
-                System.out.println(i);
-            }
-            //System.out.println(prevPenalty + " ----> " + Temp_penalty);
-            System.out.println(Temp_penalty);
+//            for(Course i : Chain)
+//            {
+//                System.out.println(i);
+//            }
+//            //System.out.println(prevPenalty + " ----> " + Temp_penalty);
+//            System.out.println(Temp_penalty);
             Chain.clear();
 
         }
