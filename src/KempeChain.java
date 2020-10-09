@@ -13,20 +13,25 @@ public class KempeChain {
     public double Algorithm(Graph G)
     {
         double FinalPenalty = 0.0;
+        double prevPenalty = Main.Penalty(G);
+        Chain.clear();
+        for (int o=0;o<100;o++)
+        {
 
-
-        for (int o=0;o<100;o++) {
             Random rand = new Random();
             int randomCourseID = rand.nextInt(G.NoOfVertices);
             int slot1, slot2;
-            Course first = G.listOfVertices.get(randomCourseID -1);
-            Chain.add(G.listOfVertices.get(randomCourseID -1));
+            Course first = G.listOfVertices.get(randomCourseID);
+            Chain.add(G.listOfVertices.get(randomCourseID ));
             slot1 = first.slotNo;
             randomCourseID = rand.nextInt(first.courses.size());
-            Course second = first.courses.get(randomCourseID -1);
+            Course second = first.courses.get(randomCourseID );
             slot2 = second.slotNo;
-            System.out.println(first + " " + second);
-
+            //System.out.println(first + " " + second);
+            if(!first.courses.contains(second))
+            {
+                System.out.println("Does not Contain");
+            }
 
             boolean visited[] = new boolean[G.NoOfVertices];
 
@@ -49,7 +54,7 @@ public class KempeChain {
             }
 
 
-            double prevPenalty = Main.Penalty(G);
+
             for (Course i : Chain
             ) {
                 if (i.slotNo == slot1)
@@ -58,22 +63,28 @@ public class KempeChain {
                     G.listOfVertices.get(i.CourseId - 1).slotNo = slot1;
 
             }
-            double currentPenalty = Main.Penalty(G);
+            double Temp_penalty = Main.Penalty(G);
 
-            if (currentPenalty > prevPenalty) {
+            if (Temp_penalty > prevPenalty) {
                 for (Course i : Chain
                 ) {
-                        G.listOfVertices.get(i.CourseId - 1).slotNo = i.slotNo;
+                       // G.listOfVertices.get(i.CourseId - 1).slotNo = i.slotNo;
+                    if (i.slotNo == slot1)
+                        G.listOfVertices.get(i.CourseId - 1).slotNo = slot2;
+                    else
+                        G.listOfVertices.get(i.CourseId - 1).slotNo = slot1;
 
                 }
             } else {
-                FinalPenalty = currentPenalty;
+                prevPenalty = Temp_penalty;
             }
-            System.out.println(prevPenalty + " ----> " + currentPenalty);
+           // System.out.println(prevPenalty + " ----> " + Temp_penalty);
+
+            Chain.clear();
 
         }
 
 
-        return FinalPenalty;
+        return prevPenalty;
     }
 }

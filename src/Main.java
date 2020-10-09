@@ -8,6 +8,9 @@ public class Main {
     {
         int diff = Math.abs(c1.slotNo-c2.slotNo);
         switch(diff) {
+            case 0:
+                System.out.println("mara");
+                return 0;
             case 1:
                 return 16;
             case 2:
@@ -120,8 +123,8 @@ public class Main {
         // print the Colours
         int slots = -1;
         for (int u = 0; u < G.listOfVertices.size(); u++){
-            System.out.println("Course " + (u+1) + " ---> Slot "
-                    + Colours[u]);
+//            System.out.println("Course " + (u+1) + " ---> Slot "
+//                    + Colours[u]);
             G.listOfVertices.get(u).slotNo = Colours[u];
             if(slots<Colours[u])
             {
@@ -179,8 +182,8 @@ public static void greedyColoring(Graph G)
         // print the Colours
         int slots = -1;
         for (int u = 0; u < G.listOfVertices.size(); u++){
-            System.out.println("Course " + (u+1) + " ---> Slot "
-                    + Colours[u]);
+//            System.out.println("Course " + (u+1) + " ---> Slot "
+//                    + Colours[u]);
             G.listOfVertices.get(u).slotNo = Colours[u];
             if(slots<Colours[u])
             {
@@ -249,7 +252,7 @@ public static void greedyColoring(Graph G)
         } catch(FileNotFoundException e){
             e.printStackTrace();
         }
-        G.printGraph();
+        //G.printGraph();
         greedyColoring(G);
         System.out.println(Penalty(G));
         LargestDegreeColoring(G);
