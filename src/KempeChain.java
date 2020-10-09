@@ -32,9 +32,11 @@ public class KempeChain {
 
             boolean visited[] = new boolean[G.NoOfVertices];
 
+            Arrays.fill(visited,false);
+
             LinkedList<Course> queue = new LinkedList();
 
-            visited[second.CourseId - 1] = true;
+            //visited[second.CourseId - 1] = true;
             visited[first.CourseId-1] = true;
             queue.add(G.listOfVertices.get(first.CourseId - 1));
 //            Chain.add(first);
