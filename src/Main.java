@@ -255,8 +255,13 @@ public static void greedyColoring(Graph G)
         LargestDegreeColoring(G);
         System.out.println(Penalty(G));
         KempeChain K = new KempeChain();
-        K.Algorithm(G);
 
+        System.out.println(K.Algorithm(G));
+
+        for (Course i: G.listOfVertices
+             ) {
+            System.out.println(i);
+        }
         }
 
 
