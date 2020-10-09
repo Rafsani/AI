@@ -261,10 +261,10 @@ public static void greedyColoring(Graph G)
 
         System.out.println(K.Algorithm(G));
 
-        for (Course i: G.listOfVertices
-             ) {
-            System.out.println(i);
-        }
+//        for (Course i: G.listOfVertices
+//             ) {
+//            System.out.println(i);
+//        }
         }
 
 

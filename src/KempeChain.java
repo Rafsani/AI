@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class KempeChain {
@@ -22,7 +19,7 @@ public class KempeChain {
             int randomCourseID = rand.nextInt(G.NoOfVertices);
             int slot1, slot2;
             Course first = G.listOfVertices.get(randomCourseID);
-            Chain.add(G.listOfVertices.get(randomCourseID ));
+           // Chain.add(G.listOfVertices.get(randomCourseID ));
             slot1 = first.slotNo;
             randomCourseID = rand.nextInt(first.courses.size());
             Course second = first.courses.get(randomCourseID );
@@ -38,11 +35,14 @@ public class KempeChain {
             LinkedList<Course> queue = new LinkedList();
 
             visited[second.CourseId - 1] = true;
-            queue.add(G.listOfVertices.get(second.CourseId - 1));
-
+            visited[first.CourseId-1] = true;
+            queue.add(G.listOfVertices.get(first.CourseId - 1));
+//            Chain.add(first);
+//            Chain.add(second);
             while (queue.size() != 0) {
                 Course s = queue.poll();
-                Chain.add(s);
+                //if(!Chain.contains(s))
+                    Chain.add(s);
 
                 for (Course i : s.courses) {
                     if (!visited[i.CourseId - 1] && (i.slotNo == slot1 || i.slotNo == slot2)) {
@@ -53,7 +53,7 @@ public class KempeChain {
 
             }
 
-
+            System.out.println("---------------------Start---------------------");
 
             for (Course i : Chain
             ) {
@@ -61,25 +61,32 @@ public class KempeChain {
                     G.listOfVertices.get(i.CourseId - 1).slotNo = slot2;
                 else
                     G.listOfVertices.get(i.CourseId - 1).slotNo = slot1;
-
+                System.out.println(i);
             }
+
             double Temp_penalty = Main.Penalty(G);
 
+
+            System.out.println("------------------------------------------");
             if (Temp_penalty > prevPenalty) {
                 for (Course i : Chain
                 ) {
-                       // G.listOfVertices.get(i.CourseId - 1).slotNo = i.slotNo;
-                    if (i.slotNo == slot1)
+//                        G.listOfVertices.get(i.CourseId - 1).slotNo = i.slotNo;
+                    if (i.slotNo == slot1) {
                         G.listOfVertices.get(i.CourseId - 1).slotNo = slot2;
-                    else
+                    }else
                         G.listOfVertices.get(i.CourseId - 1).slotNo = slot1;
 
                 }
             } else {
                 prevPenalty = Temp_penalty;
             }
-           // System.out.println(prevPenalty + " ----> " + Temp_penalty);
-
+            for(Course i : Chain)
+            {
+                System.out.println(i);
+            }
+            //System.out.println(prevPenalty + " ----> " + Temp_penalty);
+            System.out.println(Temp_penalty);
             Chain.clear();
 
         }
